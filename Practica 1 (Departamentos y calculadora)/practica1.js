@@ -10,37 +10,48 @@ let $info = document.getElementById("info");
 //funciones
 const caluladora = () => {
     let op = prompt(
-        "Escribre: \n1 - Para sumar\n2 - Resta\n3 - Multiplicación\n4 - Division"
+        "Escribre: \n1 - Para sumar\n2 - Resta\n3 - Multiplicación\n4 - Division\ns - Para salir"
     );
 
-    while (op !== "1" && op !== "2" && op !== "3" && op !== "4") {
+    while (op !== "1" && op !== "2" && op !== "3" && op !== "4" && op !== "s") {
         alert("Favor ingresar una opción validad de 1 a 4");
         op = prompt(
-            "Escribre: \n1 - Para sumar\n2 - Resta\n3 - Multiplicación\n4 - Division"
+            "Escribre: \n1 - Para sumar\n2 - Resta\n3 - Multiplicación\n4 - Division\ns - Para salir"
         );
     }
+    
+    let msg = "";
 
-    let num1 = parseFloat(prompt("Ingrese el número 1"));
-    let num2 = parseFloat(prompt("Ingrese el número 2"));
-
-    let resultado = 0;
-    if (op === "1") {
-        console.log("entre suma");
-        resultado = num1 + num2;
-    } else if (op === "2") {
-        console.log("entre resta");
-        resultado = num1 - num2;
-    } else if (op === "3") {
-        resultado = num1 * num2;
-    } else if (op === "4") {
-        if (num2 !== 0) {
-            resultado = num1 / num2;
-        } else {
-            return "No se puede dividir entre cero";
+    if (!op === "s") {
+        let num1 = parseFloat(prompt("Ingrese el número 1"));
+        let num2 = parseFloat(prompt("Ingrese el número 2"));
+    
+        let resultado = 0;
+        if (op === "1") {
+            console.log("entre suma");
+            resultado = num1 + num2;
+        } else if (op === "2") {
+            console.log("entre resta");
+            resultado = num1 - num2;
+        } else if (op === "3") {
+            resultado = num1 * num2;
+        } else if (op === "4") {
+            if (num2 !== 0) {
+                resultado = num1 / num2;
+            } else {
+                return "No se puede dividir entre cero";
+            }
+            console.log("El resulotado es " + resultado);
         }
-        console.log("El resulotado es " + resultado);
+    
+        msg = "El resultado es " + resultado;
+        
+        return msg;        
+    } else {
+        msg = "Ha salido del programa";
+        return msg;
     }
-    return "El resultado es " + resultado;
+
 };
 
 const imprimirDepartamento = (ciu, dep, info) => {
@@ -53,8 +64,9 @@ const imprimirDepartamento = (ciu, dep, info) => {
 };
 
 const setDep = () => {
-    let location = prompt("ingrese un departamento").toLowerCase();
+    let location = prompt("ingrese un departamento o 's' para salir").toLowerCase();
     while (
+        location !== "s" &&
         location !== "amazonas" &&
         location !== "antioquia" &&
         location !== "arauca" &&
@@ -101,9 +113,15 @@ const setDep = () => {
         location !== "vichada"
     ) {
         alert("Ha ingresado un valor distinto al esperado");
-        let location = prompt("ingrese un departamento").toLowerCase();
+        let location = prompt("ingrese un departamento o 's' para salir").toLowerCase();
+        if (location === "s") {
+            break;
+        }
     }
-    if (location === "amazonas") {
+    
+    if (location === "s") {
+        alert("Ha salido del programa!");
+    } else if (location === "amazonas") {
         imprimirDepartamento(
             "Leticia",
             location,
